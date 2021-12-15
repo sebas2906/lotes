@@ -3,5 +3,31 @@ body {
 }
 
 a :hover {
-    fill: red;
+    fill: rgb(255, 168, 38);
+    cursor: pointer;
 }
+
+#modal .modal-content{
+    background-color: rgb(254 255 164);
+    border-radius: 1.3rem;
+    border: 0;
+}
+
+#modal{
+    opacity: 0.9;
+    border: 0;
+}
+
+.modal-header{
+    border-bottom: unset;
+}
+
+.modal-footer{
+    border-top: unset;
+}
+
+.container-fluid{
+    background-color: rgba(125, 255, 244, 0.405);
+}
+
+
