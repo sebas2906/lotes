@@ -150,6 +150,16 @@ a :hover {
     font-size: 30px;
 }
 
+.item-selection{
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.item-selection:hover{
+    transform: scale(0.97);
+}
+
 
 
 

@@ -8586,6 +8586,24 @@
                                 <span id="modal-mt-cons"></span>
                         </div>
                     </div>
+                    <div id="seller-row">
+                        <div class="row">
+                            <div class="col-6" style="text-align: center">
+                            <span style="font-weight:bold">Vendedor</span>  
+                            </div>
+                            <div class="col-6" style="text-align: center">
+                                    <span style="font-weight:bold">Cliente</span>  
+                            </div>
+                        </div>   
+                   <div class="row" style="padding-bottom:20px">
+                       <div class="col-6" style="text-align: center">
+                               <span id="seller-name"></span>
+                       </div>
+                       <div class="col-6" style="text-align: center">
+                               <span id="customer-name"></span>
+                       </div>
+                   </div>
+                </div>
                  </div>
 
                  </div>
@@ -8628,13 +8646,27 @@
                         <label for="exampleFormControlInput1" class="form-label">Contraseña</label>
                         <input type="password" class="form-control" id="password" placeholder="Ingrese su contraseña">
                       </div>
-                      <div style="text-align: center;">
+                      <p id="login-error" style="color:red; display:none;">Credenciales no válidas</p>
+                      <div style="text-align: center; margin-top:15px">
                             <button type="button" class="btn btn-primary" id="btn_submit">Iniciar sesión</button>
                       </div>
                 </div>
               </div>
             </div>
-          </div>
+        </div>
+
+        <!-- SELECT MODAL -->
+        <div id="modal-selector" class="modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
+              <div class="modal-content">
+                <div id="modal-body" class="modal-body">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-secondary item-selection" data-bs-dismiss="modal">LOTIZACION PALMERAS DE PAIJAN</li>
+                    </ul>
+                </div>
+              </div>
+            </div>
+        </div>
 
           <!-- Switch button -->
           <div id="switch-btn" class="switch-btn">
@@ -8661,7 +8693,7 @@
 
           <!-- Title -->
           <div id="title-label" class="title-label">
-              <p class="title">Proyecto Palmeras de la playa 2</p>
+              <p id="project_title" class="title">Proyecto Palmeras de la playa 2</p>
           </div>
 
 

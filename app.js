@@ -1,6 +1,7 @@
 let modal = new bootstrap.Modal(document.getElementById('modal'));
 let loading_modal = new bootstrap.Modal(document.getElementById('modal-loading'));
 let modal_credentials = new bootstrap.Modal(document.getElementById('modal-credentials'));
+let modal_selector = new bootstrap.Modal(document.getElementById('modal-selector'));
 
 
 let modal_title = document.getElementById('modal-title');
@@ -19,27 +20,37 @@ let reserved_value = document.getElementById('cr');
 let sold_value = document.getElementById('cv');
 
 let buttons = document.getElementsByTagName('a');
-let reload_btn=document.getElementById('reload-btn');
-let switch_btn=document.getElementById('switch-btn');
+let reload_btn = document.getElementById('reload-btn');
+let switch_btn = document.getElementById('switch-btn');
+
+let project_title = document.getElementById('project_title');
+
+let seller_row=document.getElementById('seller-row');
+let client_name=document.getElementById('customer-name');
+let seller_name=document.getElementById('seller-name');
+
+let login_error=document.getElementById('login-error');
 
 
-
+seller_row.style.display='none';
 modal_credentials.show();
 
 btn_submit.addEventListener('click', () => {
     console.log('Comprobando crendeciales...');
-    /* if(credentials.username!=username_input.value || credentials.password!=password_input.value){
+     if(credentials.username!=username_input.value || credentials.password!=password_input.value){
         console.log('Credenciales no válidas');
+        login_error.style.display='unset';
         return;
-    } */
+    }
+    login_error.style.display='none';
     modal_credentials.hide();
     loading_modal.show();
     init().then(token => {
         loading_modal.hide();
-       // let buttons = document.getElementsByTagName('a');
+        // let buttons = document.getElementsByTagName('a');
         console.log(buttons);
         let arr = Array.prototype.slice.call(buttons);
-       // console.log(arr);
+        // console.log(arr);
         arr.forEach(button => {
             button.addEventListener('click', () => {
                 loading_modal.show();
@@ -62,16 +73,22 @@ btn_submit.addEventListener('click', () => {
                         state: info.estado,
                         mt_terrain: info.mtTerreno,
                         mt_construction: info.mtConstruido,
-                        price: info.precio
+                        price: info.precio,
+                        seller: info.vendedor,
+                        customer: info.cliCompra
                     }
                     console.log(obj);
                     modal_title.innerText = obj.title;
                     modal_price.innerText = 'S/. ' + obj.price; //(milliFormat(4000))
+                    seller_name.innerText=obj.seller;
+                    client_name.innerText=obj.customer;
+                    seller_row.style.display='none';
                     if (obj.state == 'Disponible') {
                         modal_status.innerHTML = `<span class="badge rounded-pill bg-light" style="color:black; border:1px black solid">${obj.state}</span>`;
                     } else if (obj.state == 'Reservado') {
                         modal_status.innerHTML = `<span class="badge rounded-pill bg-warning">${obj.state}</span>`;
-                    } else {
+                    } else {//Vendido
+                        seller_row.style.display='unset';
                         modal_status.innerHTML = `<span class="badge rounded-pill bg-primary">${obj.state}</span>`;
                     }
                     /*  modal_status.innerHTML=obj.state=='Disponible'?`<span class="badge rounded-pill bg-success">${obj.state}</span>`:`<span class="badge rounded-pill bg-danger">${obj.state}</span>`; */
@@ -200,31 +217,52 @@ async function getTocken() {
 }
 
 async function init() {
-    reload_btn.addEventListener('click',()=>{
-        console.log('reload')
-        location.reload();
-    });
-    switch_btn.addEventListener('click',()=>{
+    switch_btn.addEventListener('click', () => {
         console.log('switch');
+        modal_selector.show();
     });
     let token = await getTocken();
     token = token;
     console.log(token)
-    let c = await getPlaceInfo(token.dato);
-    console.log(c);
+    // let c = await getPlaceInfo(token.dato);
     getStats(token.dato).then(stats => { //set stats label
+        console.log('Estadisticas obtenidas: ', stats)
         available_value.innerText = stats.datos[0].cd;
         reserved_value.innerText = stats.datos[0].cr;
         sold_value.innerText = stats.datos[0].cv;
+        project_title.innerText = stats.datos[0].nombreProy;
     });
-    getAll(token.dato).then(resp=>{ //set the colors
-        resp.datos.forEach(dato=>{
-            let code=((dato.ubicacion).split(' '))[1];
-            let number=((dato.ubicacion).split(' '))[3];
-            let state=dato.estado;
-            setPlaceColor(code,number,state);
+    getAll(token.dato).then(resp => { //set the colors
+         console.log('seteando colores...')
+        resp.datos.forEach(dato => {
+            let code = ((dato.ubicacion).split(' '))[1];
+            let number = ((dato.ubicacion).split(' '))[3];
+            let state = dato.estado;
+            setPlaceColor(code, number, state);
         });
     })
+    reload_btn.addEventListener('click', () => {
+        loading_modal.show();
+        console.log('reload')
+        //location.reload();
+        getAll(token.dato).then((resp) => {
+            console.log('seteando colores...')
+            resp.datos.forEach(dato => {
+                let code = ((dato.ubicacion).split(' '))[1];
+                let number = ((dato.ubicacion).split(' '))[3];
+                let state = dato.estado;
+                setPlaceColor(code, number, state);
+            });
+             loading_modal.hide();
+        });
+        getStats(token.dato).then(stats => { //set stats label
+            console.log('Estadisticas obtenidas: ', stats)
+            available_value.innerText = stats.datos[0].cd;
+            reserved_value.innerText = stats.datos[0].cr;
+            sold_value.innerText = stats.datos[0].cv;
+            project_title.innerText = stats.datos[0].nombreProy;
+        });
+    });
     return token.dato;
 }
 
@@ -318,25 +356,22 @@ async function getAll(token) {
     return response.json();
 }
 
-function setPlaceColor(code, number, state){
-    let color='white';
-    if(state=='Disponible'){
-        color='white';
-    }else if(state=='Reservado'){
-        color='yellow';
-    }else if(state=='Vendido'){
-        color='#245ee8';
+function setPlaceColor(code, number, state) {
+    let color = 'white';
+    if (state == 'Disponible') {
+        color = 'white';
+    } else if (state == 'Reservado') {
+        color = 'yellow';
+    } else if (state == 'Vendido') {
+        color = '#245ee8';
     }
-    if(number.length==1){
-        number='0'+number;
+    if (number.length == 1) {
+        number = '0' + number;
     }
-    console.log(code+'-'+number+'-btn');
-    let button=document.getElementById(code+'-'+number+'-btn');
-    if(button==null){
+    let button = document.getElementById(code + '-' + number + '-btn');
+    if (button == null) {
         return;
     }
-    console.log('hola: '+button);
-    
     //button.classList.add(class_name);
-    (button.lastElementChild).style.fill=color;
+    (button.lastElementChild).style.fill = color;
 }
