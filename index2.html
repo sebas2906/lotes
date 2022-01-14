@@ -11,6 +11,7 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script src="./svg-pan-zoom.js"></script>
     </head>
     <body>
@@ -1828,7 +1829,15 @@
                         <polygon id="E1-12" class="st0" points="956.9,1069 940.2,1069 940.3,1106.5 956.9,1110.8 	"/>
                     </a>
                     <a id="E1-21-btn" xlink:title="E1-21">
-                        <path id="E1-21" class="st0" d="M956.9,1027.1h-16.7c0,0-2.7,41.9,0,41.9s16.7,0,16.7,0V1027.1z"/>
+                       <!--  <path id="E1-21" class="st0" d="M956.9,1027.1h-16.7c0,0-2.7,41.9,0,41.9s16.7,0,16.7,0V1027.1z"/> -->
+                       <rect
+                            id="E1-21"
+                            x="940.1"
+                            y="1027.1"
+                            class="st0"
+                            width="16.8"
+                            height="41.9"
+                        />
                     </a>
                     <a id="E1-22-btn" xlink:title="E1-22">
                         <rect
@@ -2047,6 +2056,26 @@
                         <rect
                             id="E3-23"
                             x="956.9"
+                            y="921.4"
+                            class="st0"
+                            width="16.7"
+                            height="41.9"
+                        />
+                    </a>
+                    <a id="E3-10-btn" xlink:title="E3-10">
+                        <rect
+                            id="E3-10"
+                            x="973.6"
+                            y="963.4"
+                            class="st0"
+                            width="16.7"
+                            height="41.9"
+                        />
+                    </a>
+                    <a id="E3-24-btn" xlink:title="E3-24">
+                        <rect
+                            id="E3-24"
+                            x="973.6"
                             y="921.4"
                             class="st0"
                             width="16.7"
@@ -8519,34 +8548,54 @@
                 </g>
             </svg>
         </div>
+
+
         <!-- MODAL -->
         <div id="modal" class="modal animate__animated animate__pulse" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
-            <div class="modal-dialog modal-sm">
+            <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 id="modal-title" class="modal-title me-3"></h5>
                   <div id="modal-status"></div>
-                  <!-- <span class="badge rounded-pill bg-success"><div id="modal-status"></div> </span> -->
-                  <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                  <div data-bs-dismiss="modal" style="margin-right:10px; cursor:pointer"> 
+                      <i class="fas fa-times"></i>
+                  </div>
                 </div>
+
                 <div id="modal-body" class="modal-body">
-                    <div>
-                       <span style="font-weight:bold">Área de terreno: </span>  <span id="modal-mt"></span>
+                    <div class="row" style="margin-bottom:30px">
+                        <div class="col-6" style="text-align: center">
+                            <p id="modal-title" class="modal-title me-3"></p>
+                        </div>
+                        <div class="col-6" style="text-align: center">
+                               <span id="modal-price" class="modal-price"></span>
+                        </div> 
+                    </div> 
+                    <div class="row">
+                         <div class="col-6" style="text-align: center">
+                                <span style="font-weight:bold">Área de terreno</span>  
+                        </div>
+                        <div class="col-6" style="text-align: center">
+                                <span style="font-weight:bold">Área de construcción</span>  
+                        </div>
                     </div>
-                    <div>
-                        <span style="font-weight:bold">Área de construcción: </span>  <span id="modal-mt-cons"></span>
-                     </div>
-                 <div>
-                    <span style="font-weight:bold">Precio: </span>  <span id="modal-price"></span>
+                    <div class="row" style="padding-bottom:20px">
+                        <div class="col-6" style="text-align: center">
+                                <span id="modal-mt"></span>
+                        </div>
+                        <div class="col-6" style="text-align: center">
+                                <span id="modal-mt-cons"></span>
+                        </div>
+                    </div>
                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                </div>
+
+                 </div>
               </div>
             </div>
           </div>
         <!-- ********************** -->
+
+
+
          <!-- LOADING -->
          <div id="modal-loading" class="modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
             <div class="modal-dialog modal-sm modal-dialog-centered">
@@ -8565,8 +8614,59 @@
           </div>
         <!-- ********************** -->
 
+
+        <!-- LOGIN MODAL -->
+        <div id="modal-credentials" class="modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
+              <div class="modal-content">
+                <div id="modal-body" class="modal-body">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Nombre de usuario:</label>
+                        <input type="text" class="form-control" id="user_name" placeholder="Ingrese su nombre de usuario">
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="password" placeholder="Ingrese su contraseña">
+                      </div>
+                      <div style="text-align: center;">
+                            <button type="button" class="btn btn-primary" id="btn_submit">Iniciar sesión</button>
+                      </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Switch button -->
+          <div id="switch-btn" class="switch-btn">
+              <i class="fas fa-sitemap icon"></i>
+          </div>
+
+          <!-- Reload button -->
+          <div id="reload-btn" class="reload-btn">
+            <i class="fas fa-sync-alt icon"></i>
+        </div>
+          
+          <!-- Info label -->
+          <div id="info-label" class="info-label">
+              <div class="white-circle">
+                  <p class="label-text">Disponible (<span style="font-size:12px" id="cd"></span>)</p>
+              </div> 
+              <div class="yellow-circle">
+                <p class="label-text">Reservado (<span style="font-size:12px" id="cr"></span>)</p>
+              </div> 
+              <div class="blue-circle">
+                <p class="label-text">Vendido (<span style="font-size:12px" id="cv"></span>)</p>
+              </div>
+          </div>
+
+          <!-- Title -->
+          <div id="title-label" class="title-label">
+              <p class="title">Proyecto Palmeras de la playa 2</p>
+          </div>
+
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
- 
+          <script src="./credentials.js"></script>
           <script src="./app.js"></script>
     </body>
 </html>

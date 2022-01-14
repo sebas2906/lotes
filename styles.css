@@ -3,7 +3,7 @@ body {
 }
 
 a :hover {
-    fill: rgb(255, 168, 38);
+    fill: rgb(255, 168, 38) !important;
     cursor: pointer;
 }
 
@@ -26,8 +26,130 @@ a :hover {
     border-top: unset;
 }
 
+.modal-title{
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.modal-price{
+    position: relative;
+    display: block;
+    margin-top: 5px;
+    font-size: 20px;
+}
+
 .container-fluid{
     background-color: rgba(125, 255, 244, 0.405);
 }
+
+.switch-btn{
+    height: 60px;
+    width: 60px;
+    background-color: #4aa3dd;
+    text-align: center;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    border-radius: 100%;
+    cursor: pointer;
+    -webkit-box-shadow: 3px 3px 12px 3px rgba(0,0,0,0.54); 
+    box-shadow: 3px 3px 12px 3px rgba(0,0,0,0.54);
+}
+
+.switch-btn:hover{
+    transform: scale(0.9);
+}
+
+.reload-btn{
+    height: 60px;
+    width: 60px;
+    background-color: #ff8400;
+    text-align: center;
+    position: absolute;
+    top: 100px;
+    left: 20px;
+    border-radius: 100%;
+    cursor: pointer;
+    -webkit-box-shadow: 3px 3px 12px 3px rgba(0,0,0,0.54); 
+    box-shadow: 3px 3px 12px 3px rgba(0,0,0,0.54);
+}
+
+.reload-btn:hover{
+    transform: scale(0.9);
+}
+
+.icon{
+    margin-top: 15px;
+    font-size: 29px;
+    color: white;
+}
+
+
+.info-label{
+    background-color: #4aa3dd;
+    -webkit-box-shadow: 3px 3px 12px 3px rgba(0,0,0,0.54); 
+    box-shadow: 3px 3px 12px 3px rgba(0,0,0,0.54);
+    height: 120px;
+    width: 200px;
+    border-radius: 15px;
+    position: absolute;
+    top: 77vh;
+    left: 20px;
+}
+
+.white-circle{
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    border-radius: 100%;
+    position: relative;
+    top: 15px;
+    left: 15px;
+}
+
+.yellow-circle{
+    height: 20px;
+    width: 20px;
+    background-color: yellow;
+    border-radius: 100%;
+    position: relative;
+    top: 30px;
+    left: 15px;
+}
+
+.blue-circle{
+    height: 20px;
+    width: 20px;
+    background-color: blue;
+    border-radius: 100%;
+    position: relative;
+    top: 45px;
+    left: 15px;
+}
+
+.label-text{
+    margin-left: 30px;
+    font-weight: bold;
+    color: white;
+    width: 120px;
+}
+
+.title-label{
+    position: absolute;
+    top: 50px;
+    left: 20%;
+    height: 50px;
+    width: 60vw;
+    background-color: rgba(0, 0, 0, 0.275);
+    text-align: center;
+    border-radius: 15px;
+}
+
+.title{
+    color: white;
+    font-size: 30px;
+}
+
+
 
 
